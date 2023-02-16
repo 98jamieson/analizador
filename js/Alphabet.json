@@ -1,0 +1,11 @@
+{
+    "numbers": "[0-9]",
+    "operators": "[\\+\\-\\*\/\\=\\<\\>]",
+    "letters": "[a-zA-Z_]",
+    "words": [
+        "if",
+        "else",
+        "function"
+    ],
+    "messages": "[\"]"
+}
