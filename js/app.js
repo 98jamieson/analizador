@@ -21,7 +21,8 @@ async function lex(input) {
         let { numbers, letters, operators, words, messages } = await response.json();
 
         numbers = RegExp(numbers);
-        operators = RegExp(operators);
+        let operatorsRegex = RegExp(operators.regex);
+        operators = operators.array;
         letters = RegExp(letters);
         messages = RegExp(messages);
 
@@ -42,8 +43,20 @@ async function lex(input) {
             }
 
             // Match an operator
-            if (operators.test(c)) {
-                tokens.push({ type: "operator", value: c });
+            if (operatorsRegex.test(c)) {
+                let value = "";
+
+                while (i < input.length && operatorsRegex.test(input[i])) {
+                    value += input[i];
+                    i++;
+                }
+
+                if(operators.some(variant => variant == value.toLocaleLowerCase())) {
+                    tokens.push({ type: "operator", value: value });
+                } else {
+                    // If we get here, we have an unexpected combination
+                    throw new Error(`Unexpected character: ${c}`);
+                }
                 i++;
                 continue;
             }
@@ -113,23 +126,23 @@ async function fillTable() {
 
         switch (type) {
             case "word":
-                if (columns[0].textContent != "") columns[0].textContent += ","; 
+                if (columns[0].textContent != "") columns[0].textContent += ", "; 
                 columns[0].textContent += value;
                 break;
             case "operator":
-                if (columns[1].textContent != "") columns[1].textContent += ","; 
+                if (columns[1].textContent != "") columns[1].textContent += ", "; 
                 columns[1].textContent += value;
                 break;
             case "number":
-                if (columns[4].textContent != "") columns[4].textContent += ","; 
+                if (columns[4].textContent != "") columns[4].textContent += ", "; 
                 columns[4].textContent += value;
                 break;
             case "variable":
-                if (columns[2].textContent != "") columns[2].textContent += ","; 
+                if (columns[2].textContent != "") columns[2].textContent += ", "; 
                 columns[2].textContent += value;
                 break;
             case "message":
-                if (columns[3].textContent != "") columns[3].textContent += ","; 
+                if (columns[3].textContent != "") columns[3].textContent += ", "; 
                 columns[3].textContent += value;
                 break;
             default:
