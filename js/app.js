@@ -57,7 +57,6 @@ async function lex(input) {
                     // If we get here, we have an unexpected combination
                     throw new Error(`Unexpected character: ${c}`);
                 }
-                i++;
                 continue;
             }
 
@@ -110,9 +109,15 @@ async function lex(input) {
 }
 
 async function fillTable() {
+    // get tokens from textarea
     const tokens = await lex(textarea.value);
+
+    // get table
     const tableBody = document.querySelector(".container > tbody");
+    
+    // create row
     const row = document.createElement("tr");
+    // create 5 columns
     let columns = [
         document.createElement("td"),
         document.createElement("td"),
@@ -150,6 +155,8 @@ async function fillTable() {
         }
     });
 
+    // insert columns in the row
     columns.forEach(column => row.appendChild(column));
+    // insert row in the table
     tableBody.appendChild(row);
 }
