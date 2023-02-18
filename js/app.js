@@ -1,3 +1,4 @@
+//const sweetAlert = require('sweetalert2');
 const form = document.querySelector(".form");
 const textarea = document.querySelector(".form textarea");
 
@@ -55,6 +56,12 @@ async function lex(input) {
                     tokens.push({ type: "operator", value: value });
                 } else {
                     // If we get here, we have an unexpected combination
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Unexpected character.",
+                        icon: "error",
+                        confirmButtonText: 'Okay'
+                    });
                     throw new Error(`Unexpected character: ${c}`);
                 }
                 continue;
@@ -99,6 +106,12 @@ async function lex(input) {
             }
 
             // If we get here, we have an unexpected character
+            Swal.fire({
+                title: "Error!",
+                text: "Unexpected character.",
+                icon: "error",
+                confirmButtonText: 'Okay'
+            });
             throw new Error(`Unexpected character: ${c}`);
         }
     } catch (error) {
