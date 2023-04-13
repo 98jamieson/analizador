@@ -59,7 +59,12 @@ async function lexer(input) {
                 currentChar = input[currentPosition];
             }
 
-            tokens.push({ type: TokenType.NUMBER, line, value: Number(number) });
+            // verify if the last token is a number
+            if(tokens[tokens.length - 1].type === TokenType.NUMBER) {
+                throw new Error(`Line(${line}): Se esperaba un operador`);
+            } else {
+                tokens.push({ type: TokenType.NUMBER, line, value: Number(number) });
+            }
             continue;
         }
 
