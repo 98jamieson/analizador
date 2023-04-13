@@ -6,8 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Analizador Léxico Por Eddy Cabrera</title>
         <meta name="theme-color" content="#121417" />
-        <meta property="og:site_name" content="Analizador Léxico por Eddy Cabrera" />
-        <meta property="og:title" content="Analizador Léxico por Eddy Cabrera" />
+        <meta
+            property="og:site_name"
+            content="Analizador Léxico por Eddy Cabrera"
+        />
+        <meta
+            property="og:title"
+            content="Analizador Léxico por Eddy Cabrera"
+        />
         <meta property="og:type" content="website" />
         <meta
             property="og:url"
@@ -21,17 +27,22 @@
         <meta
             property="og:description"
             content="Analizador Léxico realizado como tarea para el curso de Compiladores"
-            />
+        />
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="/css/style.css" />
     </head>
     <body>
-        <h1 class="title">Tokenizer</h1>
+        <h1 class="title">Lexer and Parser</h1>
+        <h2 class="subtitle">Simple grammar</h2>
         <form class="form" action="#">
             <fieldset>
                 <legend><h2>Type your code</h2></legend>
                 <div class="user-box">
-                    <textarea name="" id="" rows="10">if a>b "You win!"</textarea>
+                    <textarea id="code" name="code" rows="20">var i = 0;
+
+while(i < 10) {
+    i++;
+}</textarea>
                 </div>
             </fieldset>
             <button class="btn">
@@ -42,6 +53,10 @@
                 Submit
             </button>
         </form>
+        <div id="errorAlert" class="error-alert hidden">
+            <span class="close-btn" id="closeAlert">&times;</span>
+            <strong>Error!</strong> An error has occurred.
+        </div>
         <table class="container">
             <thead>
                 <tr>
@@ -54,6 +69,7 @@
             </thead>
             <tbody></tbody>
         </table>
+        
         <script src="./js/app.js"></script>
     </body>
 </html>

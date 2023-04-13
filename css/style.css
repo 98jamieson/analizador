@@ -140,7 +140,6 @@ body {
     box-shadow: 0 6px 6px -6px #0e1119;
 }
 
-
 .btn {
     position: relative;
     /*display: inline-block;*/
@@ -250,4 +249,16 @@ body {
     100% {
         bottom: 100%;
     }
+}
+
+.hidden {
+    display: none;
+}
+
+.error-alert {
+    margin: 10px;
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
 }
