@@ -28,8 +28,6 @@
     "WHILE": "WHILE",
     "FOR": "FOR",
     "COMMA": "COMMA",
-    "COLON": "COLON",
-    "DOT": "DOT",
     "SEMICOLON": "SEMICOLON",
     "EOF": "EOF"
 }

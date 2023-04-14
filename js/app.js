@@ -253,7 +253,9 @@ function parser(tokens) {
             }
 
             const identifier = identifierToken.value;
-            getNextToken(); // Consume '='
+            if (getNextToken().type === TokenType.SEMICOLON) {
+                return { type: TokenType.VAR, identifier, value: null };
+            }
             const value = parseExpression();
 
             if (getNextToken().type === TokenType.SEMICOLON) {
@@ -454,10 +456,7 @@ function parser(tokens) {
                     identifier,
                     params: params,
                 };
-            } else if (nextToken.type === TokenType.SEMICOLON) {
-                // Saltar el token ';'
-                getNextToken();
-            } else {
+            }  else {
                 currentPosition--;
                 return { type: TokenType.IDENTIFIER, value: identifier };
             }
