@@ -2,12 +2,14 @@ const form = document.querySelector(".form");
 const textarea = document.querySelector(".form textarea");
 let TokenType = null;
 
+//Validation form
 form.addEventListener("submit", (evt) => {
     evt.preventDefault();
     if(textarea.value.trim() === "") {
-        showAlert("No se puede analizar un texto vacío");
+        showAlert("texto vacío");
     } else {
         fillTable();
+        showAlert2("Sintaxis Correcta");
     }
 });
 
@@ -16,6 +18,7 @@ async function init() {
     fillTable(await lexer(textarea.value));
 }
 
+//REG EXP
 function isDigit(char) {
     return /\d/.test(char);
 }
@@ -28,6 +31,8 @@ function isWhiteSpace(char) {
     return /\s/.test(char);
 }
 
+
+//Main Functin Lexer
 async function lexer(input) {
     const tokens = [];
     const url = "./js/Grammar.json";
@@ -640,11 +645,24 @@ async function fillTable() {
 }
 
 function showAlert(message) {
-    const errorAlert = document.getElementById('errorAlert');
-    errorAlert.classList.remove('hidden');
-    errorAlert.textContent = message;
-
-    setTimeout(() => {
-        errorAlert.classList.add('hidden');
-    }, 3000);
+    swal.fire({
+        title:'Error',
+        color: 'red',
+        text: message,
+        icon:'warning',
+        confirmButtonColor: '#d33',
+    })
 }
+
+function showAlert2(message){
+    swal.fire({
+        title:'Correcta',
+        color: 'green',
+        text: message,
+        icon: 'success',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#fff',
+    })
+
+}
+
